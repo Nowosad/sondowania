@@ -15,8 +15,8 @@ for (i in stations){
         
         files <- dir(paste0("data/sondowania/", i), full.names = TRUE)
         
-        #for (j in files){
-        j <- files[1]
+        for (j in files){
+        #j <- files[1]
         
         tmp <- readLines(j) # temporary object for raw data
         term_lin <- grep(pattern="Station information",tmp)
@@ -26,7 +26,7 @@ for (i in stations){
         
         # staty bez daty i kodu stacji
         staty <- as.double(as.character(read.fwf(j, widths = c(44,20), skip=term_lin+2, header = F, n = term_lin_stat-2)[,2]))
-        date <- strptime(paste(substr(j, 7,16),substr(j, 18,19)), "%Y.%m.%d %H", tz="UTC")
+        date <- strptime(paste(substr(j, 29,38),substr(j, 40,41)), "%Y.%m.%d %H", tz="UTC")
         station <- i
         
         tmp_list <- list(station=station,date=date, res=res,staty=staty)
@@ -36,4 +36,7 @@ for (i in stations){
         
         nowa_lista[[i]] <- tmp_list
         print(j)  
+        }
 }
+
+# podejrzyj strukture nowej listy....
