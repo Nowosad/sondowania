@@ -11,6 +11,7 @@ stations <- dir(path="data/sondowania")
 
 # beginning of loop for folders/stations:
 nowa_lista <- list()
+licznik <- 1
 for (i in stations){
         
         files <- dir(paste0("data/sondowania/", i), full.names = TRUE)
@@ -34,8 +35,9 @@ for (i in stations){
         # ok., tutaj jest problem ze zlaczeniem 2 list o podobnej postaci, zeby pozniej sie dalo
         # w miare latwo na czyms takim lapply'owac:
         
-        nowa_lista[[i]] <- tmp_list
-        print(j)  
+        nowa_lista[[licznik]] <- tmp_list
+        print(j) 
+        licznik <- licznik+1
         }
 }
 
