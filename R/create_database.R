@@ -41,4 +41,6 @@ for (i in stations){
         }
 }
 
+
+saveRDS(nowa_lista, file="~/Pulpit/sondowania/baza.rds")
 # podejrzyj strukture nowej listy....
