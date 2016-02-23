@@ -57,8 +57,8 @@ for (i in stations){
         print(j) 
         licznik <- licznik+1
         }# koniec ifa dla pustych plikow
-        }
-}
+        } # koniec petli po plikach wewnatrz katalogu
+} # koniec petli po stacjach
 
 
 saveRDS(nowa_lista, file="~/Dokumenty/publikacje_własne/2016/sondowania/baza.rds")
