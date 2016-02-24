@@ -1,3 +1,4 @@
+library(parallel)
 baza <- readRDS('~/Dokumenty/publikacje_własne/2016/sondowania/baza.rds')
 
 sondaz_giver_lista <- function(listewka){
@@ -26,11 +27,18 @@ interpolacja_hgt <- function(dane, nr_kolumny){
 header <- c("PRES","HGHT","TEMP","DWPT","RELH","MIXR","DRCT","SKNT","THTA","THTE","THTV")
 
 Rprof()
-#cl <- makeCluster(11,type = 'FORK')
-aPRS <- lapply(dane2, interpolacja_hgt, 3)
-a <- do.call(rbind.data.frame, aPRS)
-names(a) <- poziomy
-rownames(a)
+#cl <- makeCluster(11)
+#aPRS <- lapply(dane2, interpolacja_hgt, 3)
+HGHT <- mclapply(sondaze, interpolacja_hgt, 2, mc.cores = 11, mc.preschedule = F)
+TEMP <- mclapply(sondaze, interpolacja_hgt, 3, mc.cores = 10, mc.preschedule = F)
+RELH <- mclapply(sondaze, interpolacja_hgt, 5, mc.cores = 10, mc.preschedule = F)
+MIXR <- mclapply(sondaze, interpolacja_hgt, 6, mc.cores = 10, mc.preschedule = F)
+DRCT <- mclapply(sondaze, interpolacja_hgt, 7, mc.cores = 10, mc.preschedule = F)
+SKNT <- mclapply(sondaze, interpolacja_hgt, 8, mc.cores = 10, mc.preschedule = F)
+
+#a <- do.call(rbind.data.frame, aPRS)
+#names(a) <- poziomy
+#rownames(a)
 #a <- sapply(dane2, interpolacja_hgt)
 #stopCluster(cl)
 Rprof(NULL)
