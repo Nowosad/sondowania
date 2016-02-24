@@ -23,10 +23,14 @@ interpolacja_hgt <- function(dane, nr_kolumny){
 
 
 
+header <- c("PRES","HGHT","TEMP","DWPT","RELH","MIXR","DRCT","SKNT","THTA","THTE","THTV")
 
 Rprof()
 #cl <- makeCluster(11,type = 'FORK')
-a <- lapply(dane2, interpolacja_hgt, 3)
+aPRS <- lapply(dane2, interpolacja_hgt, 3)
+a <- do.call(rbind.data.frame, aPRS)
+names(a) <- poziomy
+rownames(a)
 #a <- sapply(dane2, interpolacja_hgt)
 #stopCluster(cl)
 Rprof(NULL)
